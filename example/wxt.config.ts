@@ -3,11 +3,14 @@ import { defineConfig } from 'wxt';
 // See https://wxt.dev/api/config.html
 export default defineConfig({
   modules: ['@wxt-dev/module-react', 'wxt-user-settings'],
+  manifest: {
+    permissions: ['storage', 'tabs']
+  },
   userSettings: {
     title: 'Example Settings',
     description: 'Settings powered by the wxt-user-settings module.',
     storage: 'local',
-    adapter: '../../entrypoints/user-settings/SettingsForm',
+    adapter: './entrypoints/user-settings/SettingsForm',
     schema: {
       theme: {
         type: 'select',

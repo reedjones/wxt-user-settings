@@ -65,7 +65,7 @@ export default defineWxtModule<UserSettingsConfig>({
         name: 'user-settings',
         inputPath: entrypointPath,
         outputDir: wxt.config.outDir,
-        options: await wxt.builder.importEntrypoint(entrypointPath),
+        options: {},
       });
 
       // Export runtime for use in extension

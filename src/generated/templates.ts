@@ -1,5 +1,6 @@
 export const templateSources = {
-  "runtime.ts": `// Auto-generated user settings runtime
+    "runtime.ts": `// Auto-generated user settings runtime
+import { browser } from 'wxt/browser';
 import type { UserSettings, SettingKey } from './types';
 
 const STORAGE_KEY = 'user_settings';
@@ -11,7 +12,7 @@ export class SettingsManager {
     async getAll(): Promise<UserSettings> {
         if (this.cache) return this.cache;
 
-        const result = await chrome.storage[STORAGE_TYPE].get(STORAGE_KEY);
+        const result = await browser.storage[STORAGE_TYPE].get(STORAGE_KEY);
         this.cache = { ...__DEFAULT_VALUES__, ...(result[STORAGE_KEY] || {}) } as UserSettings;
         return this.cache;
     }
@@ -35,12 +36,12 @@ export class SettingsManager {
 
     async saveAll(settings: UserSettings): Promise<void> {
         this.cache = settings;
-        await chrome.storage[STORAGE_TYPE].set({ [STORAGE_KEY]: settings });
+        await browser.storage[STORAGE_TYPE].set({ [STORAGE_KEY]: settings });
     }
 
     async reset(): Promise<void> {
         this.cache = null;
-        await chrome.storage[STORAGE_TYPE].remove(STORAGE_KEY);
+        await browser.storage[STORAGE_TYPE].remove(STORAGE_KEY);
     }
 
     onChange(callback: (settings: UserSettings) => void): () => void {
@@ -50,14 +51,14 @@ export class SettingsManager {
                 callback(this.cache as UserSettings);
             }
         };
-        chrome.storage.onChanged.addListener(listener);
-        return () => chrome.storage.onChanged.removeListener(listener);
+        browser.storage.onChanged.addListener(listener);
+        return () => browser.storage.onChanged.removeListener(listener);
     }
 }
 
 export const settings = new SettingsManager();
 `,
-  "adapters/ui-schema.tsx": `// UI-Schema adapter for settings form
+    "adapters/ui-schema.tsx": `// UI-Schema adapter for settings form
 import React from 'react';
 import { Form } from '@ui-schema/ui-schema';
 import { createOrderedMap } from '@ui-schema/ui-schema/Utils/createMap';
@@ -156,7 +157,7 @@ export const SettingsForm: React.FC = () => {
     );
 };
 `,
-  "adapters/uniforms.tsx": `// Uniforms adapter for settings form
+    "adapters/uniforms.tsx": `// Uniforms adapter for settings form
 import React from 'react';
 import { AutoForm } from 'uniforms';
 import { JSONSchemaBridge } from 'uniforms-bridge-json-schema';
@@ -240,7 +241,7 @@ export const SettingsForm: React.FC = () => {
     );
 };
 `,
-  "entrypoint.tsx": `// Auto-generated settings page entrypoint
+    "entrypoint.tsx": `// Auto-generated settings page entrypoint
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 __ADAPTER_IMPORT__
@@ -255,7 +256,7 @@ if (root) {
     );
 }
 `,
-  "index.html": `<!DOCTYPE html>
+    "index.html": `<!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -270,7 +271,7 @@ if (root) {
 </body>
 
 </html>`,
-  "style.css": `:root {
+    "style.css": `:root {
   color-scheme: light dark;
   font-family: system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
 }
