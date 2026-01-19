@@ -1,12 +1,5 @@
-import { defineWxtPlugin } from "wxt/sandbox";
+import { addWxtPlugin, defineWxtModule } from 'wxt/modules';
 
-export default <any>defineWxtPlugin(() => {
-  console.log("Plugin loaded!", location.href);
-  internalValue = Math.random();
+export default defineWxtModule((wxt) => {
+  addWxtPlugin(wxt, 'wxt-user-settings/client-plugin');
 });
-
-let internalValue: number;
-
-export function doSomething() {
-  console.log("plugin: Internal value =", internalValue);
-}

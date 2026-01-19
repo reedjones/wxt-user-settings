@@ -1,7 +1,7 @@
 {
     "name": "wxt-user-settings",
-    "version": "0.1.0",
-    "description": "A custom WXT module for user settings.",
+    "version": "0.1.1",
+    "description": "WXT module that generates a settings page and runtime API.",
     "license": "MIT",
     "type": "module",
     "exports": {
@@ -34,7 +34,9 @@
         "check": "check",
         "build": "tsdown",
         "prepack": "tsdown",
-        "prepare": "wxt prepare"
+        "prepare": "wxt prepare",
+        "example:prepare": "pnpm -C example exec wxt prepare",
+        "example:refresh": "pnpm run build && pnpm -C example install"
     },
     "peerDependencies": {
         "wxt": ">=0.20.0"
@@ -56,7 +58,9 @@
         "wxt",
         "wxt-module",
         "browser-extension",
-        "settings"
+        "settings",
+        "user-settings",
+        "webextension"
     ],
     "repository": {
         "type": "git",

@@ -15,10 +15,19 @@ function App() {
     return () => stop();
   }, []);
 
+  const getDefaultTheme = () => {
+    return window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+  }
+
+  useEffect(() => {
+    document.documentElement.setAttribute("data-theme", currentSettings?.theme || getDefaultTheme());
+  }, [currentSettings?.theme])
+
   const toggleTheme = async () => {
     if (!currentSettings) return;
     const nextTheme = currentSettings.theme === 'dark' ? 'light' : 'dark';
     await settings.set('theme', nextTheme as UserSettings['theme']);
+
   };
 
   return (

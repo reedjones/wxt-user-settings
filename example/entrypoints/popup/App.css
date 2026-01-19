@@ -5,6 +5,26 @@
   text-align: center;
 }
 
+:root {
+  --grid-unit: 1.2rem;
+}
+
+[data-theme="light"] {
+  --color-bg: #ffffff;
+  --color-fg: #000000;
+}
+
+[data-theme="dark"] {
+  --color-bg: #000000;
+  --color-fg: #ffffff;
+}
+
+/* example use of CSS custom properties */
+body {
+  background-color: var(--color-bg);
+  color: var(--color-fg);
+}
+
 .logo {
   height: 6em;
   padding: 1.5em;
